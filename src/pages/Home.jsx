@@ -19,7 +19,7 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
-import Suggestion from "../components/suggestion";
+import Suggestion from "../components/Popup";
 
 // Import Firebase configuration
 import { db, auth } from "../firebase/firebase";
