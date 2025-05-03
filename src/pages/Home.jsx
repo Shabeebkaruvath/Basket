@@ -19,6 +19,7 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
+import Suggestion from "../components/suggestion";
 
 // Import Firebase configuration
 import { db, auth } from "../firebase/firebase";
@@ -192,7 +193,11 @@ export default function Home() {
                   darkMode ? "text-gray-700" : "text-gray-300"
                 } mx-auto mb-4`}
               />
-              <p className={`${darkMode ? "text-gray-400" : "text-gray-500"} text-base`}>
+              <p
+                className={`${
+                  darkMode ? "text-gray-400" : "text-gray-500"
+                } text-base`}
+              >
                 Add items to your shopping list
               </p>
             </div>
@@ -203,7 +208,11 @@ export default function Home() {
                   darkMode ? "text-gray-700" : "text-gray-300"
                 } mx-auto mb-4`}
               />
-              <p className={`${darkMode ? "text-gray-400" : "text-gray-500"} text-base`}>
+              <p
+                className={`${
+                  darkMode ? "text-gray-400" : "text-gray-500"
+                } text-base`}
+              >
                 No items match your search
               </p>
             </div>
@@ -217,7 +226,9 @@ export default function Home() {
                         darkMode ? "border-gray-700" : "border-gray-100"
                       }`
                     : ""
-                } ${darkMode ? "hover:bg-gray-750" : "hover:bg-gray-50"} transition-colors duration-150`}
+                } ${
+                  darkMode ? "hover:bg-gray-750" : "hover:bg-gray-50"
+                } transition-colors duration-150`}
               >
                 <label
                   className="flex items-center space-x-4 flex-1 touch-manipulation cursor-pointer"
@@ -258,50 +269,46 @@ export default function Home() {
           )}
         </div>
       </main>
-
-      {/* Footer input with improved alignment and padding */}
       <footer
-        className={`${
-          darkMode ? "bg-gray-900" : "bg-white"
-        } fixed bottom-0 w-full py-4 px-6 shadow-lg z-50`}
+        className={`fixed bottom-0 left-0 right-0 px-4 py-3 z-20 border-t ${
+          darkMode ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"
+        }`}
       >
-        <div className="max-w-md mx-auto">
-          <div
-            className={`flex items-center ${
-              darkMode ? "bg-gray-800" : "bg-gray-50"
-            } px-4 py-3 rounded-full overflow-hidden shadow-sm border ${
-              darkMode ? "border-gray-700" : "border-gray-200"
-            }`}
-          >
+        <div
+          className={`flex flex-col gap-1 rounded-xl shadow-inner w-full max-w-md mx-auto ${
+            darkMode ? "bg-gray-800" : "bg-gray-100"
+          } p-2`}
+        >
+          <div className="flex items-center">
             <input
-              id="newItemInput"
               type="text"
-              className={`flex-1 ${
+              className={`flex-1 bg-transparent text-sm focus:outline-none ${
                 darkMode
-                  ? "bg-gray-800 text-white placeholder-gray-400"
-                  : "bg-gray-50 text-gray-800 placeholder-gray-500"
-              } focus:outline-none text-base`}
+                  ? "text-white placeholder-gray-400"
+                  : "text-gray-900 placeholder-gray-500"
+              }`}
               placeholder="Add item..."
               value={newItem}
               onChange={(e) => setNewItem(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleAdd()}
             />
-
             <button
               onClick={handleAdd}
-              className={`ml-2 ${
-                newItem.trim()
-                  ? "bg-blue-500 text-white hover:bg-blue-600"
-                  : darkMode
-                  ? "bg-gray-700 text-gray-500"
-                  : "bg-gray-200 text-gray-400"
-              } p-2 rounded-full focus:outline-none transition-colors duration-200`}
               disabled={!newItem.trim()}
-              aria-label="Add item"
+              className={`ml-2 p-2 rounded-full transition ${
+                newItem.trim()
+                  ? "bg-blue-600 text-white"
+                  : darkMode
+                  ? "bg-gray-700 text-gray-500 cursor-not-allowed"
+                  : "bg-gray-300 text-gray-400 cursor-not-allowed"
+              }`}
             >
-              <Send size={18} className={newItem.trim() ? "" : "opacity-60"} />
+              <Send className="w-4 h-4" />
             </button>
           </div>
+
+          {/* Suggestions appear below input */}
+          {newItem && <Suggestion inputValue={newItem} onSelect={setNewItem} />}
         </div>
       </footer>
     </div>
