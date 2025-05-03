@@ -1,12 +1,38 @@
-# React + Vite
+# 🧺 Basket – Shared Shopping List (PWA)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Basket is a lightweight, modern, and responsive shopping list app built with **React + Vite**, powered by **Firebase** for real-time data sync. It supports multiple users under the same account (like families) to add, delete, and mark products as purchased – all in real time.
 
-Currently, two official plugins are available:
+Now also available as a **Progressive Web App (PWA)** – installable, offline-friendly, and fast!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🧾 Add, delete, and mark items as purchased
+- 👨‍👩‍👧‍👦 Real-time sync between multiple users
+- 🔍 Search through your shopping list
+- 🌙 Light/dark theme support
+- 📲 Installable as a PWA (works offline)
+- 🔒 Firebase Auth integration
+- ☁️ Firestore for persistent data storage
+
+---
+
+## 🛠 Tech Stack
+
+- ⚡ **Vite** – Fast build tool
+- ⚛️ **React** – UI framework
+- 🧪 **Tailwind CSS** – Styling
+- 🔥 **Firebase** – Auth & Firestore
+- 📦 **Workbox (via Vite Plugin)** – PWA support
+- 🌙 **Dark mode** – Context-based theming
+
+---
+
+## 🧑‍💻 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/basket-app.git
+cd basket-app
