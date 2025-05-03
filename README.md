@@ -1,4 +1,4 @@
-# 🧺 Basket – Shared Shopping List (PWA)
+#  Basket – Shared Shopping List (PWA)
 
 Basket is a lightweight, modern, and responsive shopping list app built with **React + Vite**, powered by **Firebase** for real-time data sync. It supports multiple users under the same account (like families) to add, delete, and mark products as purchased – all in real time.
 
