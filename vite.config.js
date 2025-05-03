@@ -16,7 +16,7 @@ export default defineConfig({
         short_name: "Basket",
         description: "A shared shopping list for your home",
         start_url: "/",
-        display: "fullscreen",
+        display: "standalone",
         background_color: "#ffffff",
         theme_color: "#3b82f6",
         
