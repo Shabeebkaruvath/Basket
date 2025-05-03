@@ -271,7 +271,7 @@ export default function Home() {
       <footer
         className={`${
           darkMode ? "bg-gray-900" : "bg-white"
-        } sticky bottom-0 p-4 shadow-lg rounded-full`}
+        } fixed bottom-0 w-full p-4 shadow-lg z-50`}
       >
         <div className="max-w-md mx-auto">
           <div
@@ -299,15 +299,11 @@ export default function Home() {
               onClick={handleAdd}
               className={`ml-2 ${
                 newItem.trim()
-                  ? darkMode
-                    ? "bg-blue-500 text-white"
-                    : "bg-blue-500 text-white"
+                  ? "bg-blue-500 text-white hover:bg-blue-600"
                   : darkMode
                   ? "bg-gray-700 text-gray-500"
                   : "bg-gray-200 text-gray-400"
-              } p-2 rounded-full focus:outline-none transition-colors ${
-                newItem.trim() && "hover:bg-blue-600"
-              }`}
+              } p-2 rounded-full focus:outline-none transition-colors`}
               disabled={!newItem.trim()}
               aria-label="Add item"
             >
