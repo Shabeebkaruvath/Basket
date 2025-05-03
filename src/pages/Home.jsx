@@ -6,6 +6,7 @@ import {
   Trash2,
   Check,
   Settings as SettingsIcon,
+  Send,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../contexts/ThemeContext";
@@ -16,7 +17,7 @@ import {
   onSnapshot,
   getDoc,
   updateDoc,
-  deleteDoc
+  deleteDoc,
 } from "firebase/firestore";
 
 // Import Firebase configuration
@@ -62,10 +63,10 @@ export default function Home() {
   useEffect(() => {
     const user = auth.currentUser;
     if (!user) return;
-  
+
     const userRef = doc(db, "users", user.uid);
     const dataRef = collection(userRef, "data");
-  
+
     const unsubscribe = onSnapshot(dataRef, (snapshot) => {
       const updatedItems = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -73,10 +74,10 @@ export default function Home() {
       }));
       setItems(updatedItems);
     });
-  
+
     return () => unsubscribe(); // Clean up on unmount
   }, []);
-  
+
   // Toggle purchased state for an item
   const handleToggle = async (itemId) => {
     const user = auth.currentUser;
@@ -134,36 +135,37 @@ export default function Home() {
     <div
       className={`min-h-screen ${
         darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
-      } flex flex-col font-sans max-w-md mx-auto relative`}
+      } flex flex-col font-sans max-w-full sm:max-w-md mx-auto relative`}
     >
       {/* iOS-style header */}
+      {/* iOS-style header with increased height and font size */}
       <header
         className={`${
-          darkMode ? "bg-gray-900" : "bg-gray-100"
-        } px-4 pt-2 pb-2 sticky top-0 z-10`}
+          darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+        } px-6 py-6 sticky top-0 z-10 border-b ${
+          darkMode ? "border-gray-700" : "border-gray-200"
+        } shadow-sm`}
       >
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Basket</h1>
+        <div className="max-w-4xl mx-auto flex justify-between items-center">
+          <h1 className="text-4xl font-bold">Basket</h1>
           <div className="flex items-center">
             <div className="flex items-center text-blue-500">
-              <ShoppingBag className="w-5 h-5 mr-1" />
-              <span className="font-medium text-sm">{items.length}</span>
+              <ShoppingBag className="w-8 h-8 mr-3" />
+              <span className="font-semibold text-2xl">{items.length}</span>
             </div>
             <button
               onClick={() => navigate("/settings")}
-              className="ml-4 text-blue-500"
+              className="ml-6 text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-full p-1"
               aria-label="Settings"
             >
-              <SettingsIcon className="w-5 h-5" />
+              <SettingsIcon className="w-8 h-8" />
             </button>
           </div>
         </div>
       </header>
 
       {/* Search bar */}
-      <div
-        className={`px-4 pb-2 pt-1 ${darkMode ? "bg-gray-900" : "bg-gray-100"}`}
-      >
+      <div className={`px-4 py-2 ${darkMode ? "bg-gray-900" : "bg-gray-100"}`}>
         <div
           className={`${
             darkMode ? "bg-gray-800" : "bg-gray-200"
@@ -187,7 +189,7 @@ export default function Home() {
       {/* Main content */}
       <main className="flex-1 overflow-y-auto pb-20">
         <div
-          className={`mx-4 ${
+          className={`mx-4 my-2 ${
             darkMode ? "bg-gray-800" : "bg-white"
           } rounded-lg shadow-sm overflow-hidden`}
         >
@@ -225,16 +227,18 @@ export default function Home() {
                     : ""
                 } ${darkMode ? "active:bg-gray-700" : "active:bg-gray-50"}`}
               >
-                <label className="flex items-center space-x-3 flex-1 touch-manipulation">
+                <label
+                  className="flex items-center space-x-3 flex-1 touch-manipulation"
+                  onClick={() => handleToggle(item.id || item.name)}
+                >
                   <div
-                    className={`w-6 h-6 rounded-full flex items-center justify-center border ${
+                    className={`w-6 h-6 rounded-full flex items-center justify-center border cursor-pointer ${
                       item.purchased
                         ? "bg-blue-500 border-blue-500"
                         : darkMode
                         ? "border-gray-600"
                         : "border-gray-300"
                     }`}
-                    onClick={() => handleToggle(item.id || item.name)}
                   >
                     {item.purchased && <Check className="w-4 h-4 text-white" />}
                   </div>
@@ -252,7 +256,7 @@ export default function Home() {
                 </label>
                 <button
                   onClick={() => handleDelete(item.id || item.name)}
-                  className="text-red-500 p-2 -mr-2"
+                  className="text-red-500 p-2 focus:outline-none"
                   aria-label="Delete item"
                 >
                   <Trash2 className="w-5 h-5" />
@@ -266,37 +270,50 @@ export default function Home() {
       {/* Footer input for new items */}
       <footer
         className={`${
-          darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
-        } p-4 border-t sticky bottom-0 shadow-md`}
+          darkMode ? "bg-gray-900" : "bg-white"
+        } sticky bottom-0 p-4 shadow-lg rounded-full`}
       >
-        <div className="flex space-x-2 items-center">
-          <input
-            id="newItemInput"
-            type="text"
-            className={`flex-1 p-3 ${
-              darkMode
-                ? "bg-gray-700 text-white placeholder-gray-400"
-                : "bg-gray-100 text-gray-800 placeholder-gray-500"
-            } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-base`}
-            placeholder="Add item..."
-            value={newItem}
-            onChange={(e) => setNewItem(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleAdd()}
-          />
-          <button
-            onClick={handleAdd}
-            className={`p-3 ${
-              newItem.trim()
-                ? "text-blue-500"
-                : darkMode
-                ? "text-gray-600"
-                : "text-gray-400"
-            } rounded-lg`}
-            disabled={!newItem.trim()}
-            aria-label="Add item"
+        <div className="max-w-md mx-auto">
+          <div
+            className={`flex items-center ${
+              darkMode ? "bg-gray-800" : "bg-gray-50"
+            } px-4 py-3 rounded-full overflow-hidden shadow-sm border ${
+              darkMode ? "border-gray-700" : "border-gray-200"
+            }`}
           >
-            <Plus className="w-6 h-6" />
-          </button>
+            <input
+              id="newItemInput"
+              type="text"
+              className={`flex-1 ${
+                darkMode
+                  ? "bg-gray-800 text-white placeholder-gray-400"
+                  : "bg-gray-50 text-gray-800 placeholder-gray-500"
+              } focus:outline-none text-base`}
+              placeholder="Add item..."
+              value={newItem}
+              onChange={(e) => setNewItem(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleAdd()}
+            />
+
+            <button
+              onClick={handleAdd}
+              className={`ml-2 ${
+                newItem.trim()
+                  ? darkMode
+                    ? "bg-blue-500 text-white"
+                    : "bg-blue-500 text-white"
+                  : darkMode
+                  ? "bg-gray-700 text-gray-500"
+                  : "bg-gray-200 text-gray-400"
+              } p-2 rounded-full focus:outline-none transition-colors ${
+                newItem.trim() && "hover:bg-blue-600"
+              }`}
+              disabled={!newItem.trim()}
+              aria-label="Add item"
+            >
+              <Send size={18} className={newItem.trim() ? "" : "opacity-60"} />
+            </button>
+          </div>
         </div>
       </footer>
     </div>
