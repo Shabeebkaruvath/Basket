@@ -15,10 +15,11 @@ export default defineConfig({
         name: "Basket",
         short_name: "Basket",
         description: "A shared shopping list for your home",
-        start_url: ".",
+        start_url: "/",
         display: "fullscreen",
         background_color: "#ffffff",
         theme_color: "#3b82f6",
+        
         icons: [
           {
             src: "/icons/icon-192x192.png",
