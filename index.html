@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="./src/assets/512x512.png" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <title>Basket - A shared shopping list for your home</title>
-    <meta name="description" content="A shared shopping list for your home" />
-
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <meta name="apple-mobile-web-app-title" content="Basket" />
-    <meta name="theme-color" content="#3b82f6" />
-
-    <!-- Prevent top bar from showing on iOS -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
-    />
-
-    <link rel="apple-touch-icon" href="icons/192x192.png" />
-    <link rel="manifest" href="manifest.json" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <noscript>
-      <div style="padding: 20px; text-align: center">
-        Please enable JavaScript to use this application.
-      </div>
-    </noscript>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#3b82f6" />
+  
+  <!-- PWA Meta Tags -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Basket" />
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512x512.png" />
+  <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+  <link rel="manifest" href="/manifest.json" />
+  
+  <!-- Splash Screen Meta (iOS) -->
+  <link rel="apple-touch-startup-image" href="/splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
+  
+  <title>Basket - Shared Shopping List</title>
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+  
+  <!-- PWA Installation Prompt Fallback -->
+  <script>
+    window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('PWA install prompt available');
+      // You can store the event for later use
+      window.deferredPrompt = e;
+    });
+  </script>
+</body>
 </html>
