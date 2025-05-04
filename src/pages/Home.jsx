@@ -148,7 +148,7 @@ export default function Home() {
             <SettingsIcon className="w-6 h-6" />
           </button>
 
-          <h1 className="text-xl font-semibold">Basket</h1>
+          <h1 className="text-3xl font-semibold">Basket</h1>
 
           <div className="text-blue-500 flex items-center">
             <ShoppingBag className="w-6 h-6 mr-1" />

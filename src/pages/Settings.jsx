@@ -104,7 +104,7 @@ export default function Settings() {
               role="button"
               tabIndex={0}
             />
-            <h1 className="text-xl font-semibold">Settings</h1>
+            <h1 className="text-3xl font-semibold">Settings</h1>
           </div>
           <div className="w-5"></div> {/* Empty div for spacing */}
         </div>

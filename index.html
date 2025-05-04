@@ -5,21 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#3b82f6" />
   
-  <!-- PWA Meta Tags -->
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Basket" />
-  
-  <!-- Favicon and App Icons -->
-  <link rel="icon" href="/favicon.ico" />
+  <!-- Favicon -->
+  <link rel="icon" href="/icons/192x192.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/icons/192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/icons/512x512.png" />
   <link rel="apple-touch-icon" href="/icons/192x192.png" />
-  <link rel="manifest" href="/manifest.json" />
-  
-  <!-- Splash Screen Meta (iOS) -->
-  <link rel="apple-touch-startup-image" href="/splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
   
   <title>Basket - Shared Shopping List</title>
   
@@ -30,14 +19,5 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
-  
-  <!-- PWA Installation Prompt Fallback -->
-  <script>
-    window.addEventListener('beforeinstallprompt', (e) => {
-      console.log('PWA install prompt available');
-      // You can store the event for later use
-      window.deferredPrompt = e;
-    });
-  </script>
 </body>
 </html>
